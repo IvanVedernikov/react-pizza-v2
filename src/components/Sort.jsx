@@ -5,17 +5,17 @@ const Sort = ({ value, onChangeSort }) => {
     {
       name: "популярности (по возрастанию)",
       sortProperty: "rating",
-      order: "desc",
+      order: "asc",
     },
     {
       name: "популярности (по убыванию)",
       sortProperty: "rating",
-      order: "asc",
+      order: "desc",
     },
-    { name: "цене (по возрастанию)", sortProperty: "price", order: "desc" },
-    { name: "цене (по убыванию)", sortProperty: "price", order: "asc" },
-    { name: "алфавиту (по возрастанию)", sortProperty: "title", order: "desc" },
-    { name: "алфавиту (по убыванию)", sortProperty: "title", order: "asc" },
+    { name: "цене (по возрастанию)", sortProperty: "price", order: "asc" },
+    { name: "цене (по убыванию)", sortProperty: "price", order: "desc" },
+    { name: "алфавиту (по возрастанию)", sortProperty: "title", order: "asc" },
+    { name: "алфавиту (по убыванию)", sortProperty: "title", order: "desc" },
   ];
   const onClickListItem = (i) => {
     onChangeSort(i);

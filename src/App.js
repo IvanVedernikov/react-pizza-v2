@@ -1,5 +1,5 @@
 import "./App.css";
-import React from "react";
+import React, { useState } from "react";
 import "./scss/app.scss";
 import Header from "./components/Header";
 import { Routes, Route } from "react-router-dom";
@@ -9,13 +9,15 @@ import NotFound from "./components/NotFoundBlock/NotFoundBlock";
 import Card from "./pages/Card";
 
 function App() {
+  const [searchValue, setSearchValue] = useState("");
+
   return (
     <div className="wrapper">
-      <Header />
+      <Header searchValue={searchValue} setSearchValue={setSearchValue} />
       <div className="content">
         <Routes>
           <Route path="/cart" element={<Card />} />
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home searchValue={searchValue} />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
