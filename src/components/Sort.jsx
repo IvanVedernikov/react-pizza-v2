@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-const Sort = ({ value, onChangeSort }) => {
+import { useDispatch, useSelector } from "react-redux";
+import { setSort } from "../redux/slices/filterSlice";
+const Sort = () => {
   const [open, setOpen] = useState(false);
   const list = [
     {
@@ -17,8 +19,10 @@ const Sort = ({ value, onChangeSort }) => {
     { name: "алфавиту (по возрастанию)", sortProperty: "title", order: "asc" },
     { name: "алфавиту (по убыванию)", sortProperty: "title", order: "desc" },
   ];
-  const onClickListItem = (i) => {
-    onChangeSort(i);
+  const dispatch = useDispatch();
+  const value = useSelector((state) => state.filters.sort);
+  const onClickListItem = (item) => {
+    dispatch(setSort(item));
     setOpen(false);
   };
   return (

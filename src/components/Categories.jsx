@@ -1,6 +1,10 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setCategoryId } from "../redux/slices/filterSlice";
 
-const Categories = ({ value, onChangeCategory }) => {
+const Categories = () => {
+  const value = useSelector((state) => state.filters.categoryId);
+  const dispatch = useDispatch();
   const categories = [
     "Все",
     "Мясные",
@@ -18,7 +22,7 @@ const Categories = ({ value, onChangeCategory }) => {
               key={i}
               className={value === i ? "active" : ""}
               onClick={() => {
-                onChangeCategory(i);
+                dispatch(setCategoryId(i));
               }}
             >
               {categoryName}
