@@ -6,7 +6,7 @@ import { Routes, Route } from "react-router-dom";
 
 import Home from "./pages/Home";
 import NotFound from "./components/NotFoundBlock/NotFoundBlock";
-import Card from "./pages/Card";
+import Card from "./pages/Cart";
 
 export const SearchContext = createContext();
 

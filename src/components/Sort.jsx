@@ -1,32 +1,48 @@
-import React, { useState } from "react";
+import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSort } from "../redux/slices/filterSlice";
-const Sort = () => {
-  const [open, setOpen] = useState(false);
-  const list = [
-    {
-      name: "популярности (по возрастанию)",
-      sortProperty: "rating",
-      order: "asc",
-    },
-    {
-      name: "популярности (по убыванию)",
-      sortProperty: "rating",
-      order: "desc",
-    },
-    { name: "цене (по возрастанию)", sortProperty: "price", order: "asc" },
-    { name: "цене (по убыванию)", sortProperty: "price", order: "desc" },
-    { name: "алфавиту (по возрастанию)", sortProperty: "title", order: "asc" },
-    { name: "алфавиту (по убыванию)", sortProperty: "title", order: "desc" },
-  ];
+export const sortList = [
+  {
+    name: "популярности (по возрастанию)",
+    sortProperty: "rating",
+    order: "asc",
+  },
+  {
+    name: "популярности (по убыванию)",
+    sortProperty: "rating",
+    order: "desc",
+  },
+  { name: "цене (по возрастанию)", sortProperty: "price", order: "asc" },
+  { name: "цене (по убыванию)", sortProperty: "price", order: "desc" },
+  { name: "алфавиту (по возрастанию)", sortProperty: "title", order: "asc" },
+  { name: "алфавиту (по убыванию)", sortProperty: "title", order: "desc" },
+];
+
+const Sort = memo(() => {
   const dispatch = useDispatch();
   const value = useSelector((state) => state.filters.sort);
+  const [open, setOpen] = useState(false);
+  const sortRef = React.useRef(null);
   const onClickListItem = (item) => {
     dispatch(setSort(item));
     setOpen(false);
   };
+
+  useEffect(() => {
+    const handlerClickOutside = (event) => {
+      if (!event.path.includes(sortRef.current)) {
+        setOpen(false);
+      }
+    };
+    document.body.addEventListener("click", handlerClickOutside);
+
+    return () => {
+      document.body.removeEventListener("click", handlerClickOutside);
+    };
+  }, []);
+
   return (
-    <div className="sort">
+    <div ref={sortRef} className="sort">
       <div className="sort__label">
         <svg
           width="10"
@@ -46,7 +62,7 @@ const Sort = () => {
       {open && (
         <div className="sort__popup">
           <ul>
-            {list.map((item, i) => (
+            {sortList.map((item, i) => (
               <li
                 key={i}
                 className={
@@ -65,6 +81,6 @@ const Sort = () => {
       )}
     </div>
   );
-};
+});
 
 export default Sort;
