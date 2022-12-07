@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import logoSvg from "../assets/img/pizza-logo.svg";
 import Search from "./Search";
 const Header = () => {
-  const { items, totalPrice, totalCount } = useSelector((state) => state.cart);
+  const { totalPrice, totalCount } = useSelector((state) => state.cart);
   return (
     <div className="header">
       <div className="container">

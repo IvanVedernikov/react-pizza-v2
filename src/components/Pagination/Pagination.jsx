@@ -5,7 +5,8 @@ import { setCurrentPage } from "../../redux/slices/filterSlice";
 import styles from "./Pagination.module.scss";
 const Pagination = () => {
   const dispatch = useDispatch();
-  const { currentPage, pageCount } = useSelector((state) => state.filters);
+  const { currentPage } = useSelector((state) => state.filters);
+  const { pageCount } = useSelector((state) => state.pizza);
   return (
     pageCount > 1 && (
       <ReactPaginate
