@@ -1,5 +1,6 @@
 import React, { memo, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { selectSort } from "../redux/slices/cartSlice";
 import { setSort } from "../redux/slices/filterSlice";
 export const sortList = [
   {
@@ -20,7 +21,7 @@ export const sortList = [
 
 const Sort = memo(() => {
   const dispatch = useDispatch();
-  const value = useSelector((state) => state.filters.sort);
+  const value = useSelector(selectSort);
   const [open, setOpen] = useState(false);
   const sortRef = React.useRef(null);
   const onClickListItem = (item) => {

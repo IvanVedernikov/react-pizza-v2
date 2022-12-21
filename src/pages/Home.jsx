@@ -10,20 +10,19 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { setFilters } from "../redux/slices/filterSlice";
 import { fetchPizzas } from "../redux/slices/pizzaSlice";
+import { selectFilters, selectPizza } from "../redux/slices/cartSlice";
 
 const Home = () => {
-  const { searchValue } = useContext(SearchContext);
   const isSearch = useRef(false);
   const isMounted = useRef(false);
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
-  const { categoryId, sort, currentPage } = useSelector(
-    (state) => state.filters
-  );
+  const { categoryId, sort, currentPage, searchValue } =
+    useSelector(selectFilters);
 
-  const { items, status } = useSelector((state) => state.pizza);
+  const { items, status } = useSelector(selectPizza);
 
   // если был первый рендер, то проверяем URL-параметры и сохраняем в Redux
   useEffect(() => {
