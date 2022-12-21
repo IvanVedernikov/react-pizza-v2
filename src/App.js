@@ -7,19 +7,19 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import NotFound from "./components/NotFoundBlock/NotFoundBlock";
 import Card from "./pages/Cart";
+import FullPizza from "./pages/FullPizza";
+import MainLayout from "./layouts/MainLayout";
 
 function App() {
   return (
-    <div className="wrapper">
-      <Header />
-      <div className="content">
-        <Routes>
-          <Route path="/cart" element={<Card />} />
-          <Route path="/" element={<Home />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </div>
-    </div>
+    <Routes>
+      <Route path="/" element={<MainLayout />}>
+        <Route path="" element={<Home />} />
+        <Route path="/cart" element={<Card />} />
+        <Route path="/pizza/:id" element={<FullPizza />} />
+        <Route path="*" element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 }
 

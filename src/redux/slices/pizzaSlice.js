@@ -8,7 +8,6 @@ export const fetchPizzas = createAsyncThunk(
     const { data } = await axios.get(
       `https://638bb8ec7220b45d2295a761.mockapi.io/items?page=${currentPage}&limit=4&${category}&sortBy=${sortBy}&order=${order}${search}`
     );
-    console.log("thunkApi ", thunkApi.getState());
     return data;
   }
 );
@@ -34,7 +33,6 @@ const pizzaSlice = createSlice({
       state.items = action.payload.items;
       state.count = action.payload.count;
       state.status = "success";
-      console.log(state.count / 4);
       state.pageCount = Math.ceil(state.count / 4);
     },
     [fetchPizzas.pending]: (state) => {
