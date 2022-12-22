@@ -1,9 +1,7 @@
 import "./App.css";
 import React from "react";
 import "./scss/app.scss";
-import Header from "./components/Header";
 import { Routes, Route } from "react-router-dom";
-
 import Home from "./pages/Home";
 import NotFound from "./components/NotFoundBlock/NotFoundBlock";
 import Card from "./pages/Cart";

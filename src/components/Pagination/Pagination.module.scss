@@ -1,37 +1,38 @@
 .root {
     :global {
-        li {
-            display: inline-block;
-            text-align: center;
-            height: 45px;
-            width: 45px;
-            padding: 10px;
-            // line-height: 42px;
-            border: 1px solid #fe5f1e;
-            border-radius: 30px;
-            margin-right: 10px;
-
-            &:hover {
-                background-color: #fe5f1e;
-                a {
-                    color: white;
-                }
-            }
-
-            &.selected {
-                background-color: #fe5f1e;
-                a {
-                    color: white;
-                }
-            }
-
-            a {
+            padding-bottom: 20px;
+            li {
                 display: inline-block;
-                color: #fe5f1e;
-                cursor: pointer;
+                text-align: center;
+                height: 45px;
+                width: 45px;
+                padding: 10px;
+                // line-height: 42px;
+                border: 1px solid #fe5f1e;
+                border-radius: 30px;
+                margin-right: 30px;
+
+                &:hover {
+                    background-color: #fe5f1e;
+                    a {
+                        color: white;
+                    }
+                }
+
+                &.selected {
+                    background-color: #fe5f1e;
+                    a {
+                        color: white;
+                    }
+                }
+
+                a {
+                    display: inline-block;
+                    color: #fe5f1e;
+                    cursor: pointer;
+                }
             }
         }
-    }
 }
 
 
