@@ -8,7 +8,23 @@ import {
 
 export const typeArr = ["тонкое", "традиционное"];
 
-const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
+type PizzaBlockProps = {
+  id: string;
+  title: string;
+  price: number;
+  imageUrl: string;
+  sizes: number[];
+  types: Array<number>;
+};
+
+const PizzaBlock: React.FC<PizzaBlockProps> = ({
+  id,
+  title,
+  price,
+  imageUrl,
+  sizes,
+  types,
+}) => {
   const [selectSize, setSelectSize] = useState(0);
   const [selectType, setSelectType] = useState(0);
 
@@ -18,7 +34,19 @@ const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
 
   const dispatch = useDispatch();
 
-  const onClickAdd = ({ id, title, price, imageUrl, sizes }) => {
+  const onClickAdd = ({
+    id,
+    title,
+    price,
+    imageUrl,
+    sizes,
+  }: {
+    id: string;
+    title: string;
+    price: number;
+    imageUrl: string;
+    sizes: number[];
+  }) => {
     const item = {
       id,
       title,
@@ -68,7 +96,8 @@ const PizzaBlock = ({ id, title, price, imageUrl, sizes, types }) => {
           <div className="pizza-block__price">от {price} ₽</div>
           <button
             className="button button--outline button--add"
-            onClick={() => {
+            onClick={(event) => {
+              event.stopPropagation();
               onClickAdd({ id, title, price, imageUrl, sizes });
             }}
           >

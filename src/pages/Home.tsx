@@ -11,7 +11,7 @@ import { setFilters } from "../redux/slices/filterSlice";
 import { fetchPizzas } from "../redux/slices/pizzaSlice";
 import { selectFilters, selectPizza } from "../redux/slices/cartSlice";
 
-const Home = () => {
+const Home: React.FC = () => {
   const isSearch = useRef(false);
   const isMounted = useRef(false);
   const dispatch = useDispatch();
@@ -44,6 +44,7 @@ const Home = () => {
     const search = searchValue ? `&search=${searchValue}` : "";
 
     dispatch(
+      //@ts-ignore
       fetchPizzas({
         sortBy,
         order,
@@ -81,10 +82,10 @@ const Home = () => {
   const skeletons = [...new Array(6)].map((_, index) => (
     <PizzaBlockSkeleton key={index} />
   ));
-  const pizzas = items.map((object) => (
-    <Link key={object.id} to={`/pizza/${object.id}`}>
+  const pizzas = items.map((item: any) => (
+    <Link key={item.id} to={`/pizza/${item.id}`}>
       {" "}
-      <PizzaBlock {...object} />
+      <PizzaBlock {...item} />
     </Link>
   ));
   return (
@@ -98,7 +99,7 @@ const Home = () => {
         {status === "error" ? (
           <div className="content__error-info">
             <h2>
-              Произошла ошибка <icon>😕</icon>
+              Произошла ошибка <span>😕</span>
             </h2>
             <p>
               К сожелению, не удалось получить питцы. Попробуйте повторить

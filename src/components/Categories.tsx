@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { selectCategoryId } from "../redux/slices/cartSlice";
 import { setCategoryId, setCurrentPage } from "../redux/slices/filterSlice";
 
-const Categories = () => {
+const Categories: React.FC = () => {
   const value = useSelector(selectCategoryId);
   const dispatch = useDispatch();
   const categories = [

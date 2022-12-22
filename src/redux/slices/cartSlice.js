@@ -24,7 +24,7 @@ const cartSlice = createSlice({
       });
     },
 
-    refreshTotal(state, action) {
+    refreshTotal(state) {
       state.totalPrice = state.items.reduce((summ, item) => {
         return summ + item.price * item.count;
       }, 0);
@@ -41,7 +41,7 @@ const cartSlice = createSlice({
       }
     },
 
-    clearItems(state, action) {
+    clearItems(state) {
       state.items = [];
       state.totalPrice = 0;
       state.totalCount = 0;

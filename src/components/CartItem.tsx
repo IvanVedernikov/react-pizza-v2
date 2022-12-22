@@ -7,7 +7,25 @@ import {
   remoteItem,
 } from "../redux/slices/cartSlice";
 
-const CartItem = ({ id, title, price, count, imageUrl, type, size }) => {
+export type CartItemProps = {
+  id: string;
+  title: string;
+  price: number;
+  count: number;
+  imageUrl: string;
+  type: number;
+  size: number;
+};
+
+const CartItem: React.FC<CartItemProps> = ({
+  id,
+  title,
+  price,
+  count,
+  imageUrl,
+  type,
+  size,
+}) => {
   const dispatch = useDispatch();
 
   const onClickRemove = () => {
