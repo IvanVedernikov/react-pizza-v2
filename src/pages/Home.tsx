@@ -5,16 +5,25 @@ import Sort, { sortList } from "../components/Sort";
 import PizzaBlock from "../components/PizzaBlock";
 import PizzaBlockSkeleton from "../components/PizzaBlock/PizzaBlockSkeleton";
 import Pagination from "../components/Pagination/Pagination";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { setFilters } from "../redux/slices/filterSlice";
-import { fetchPizzas } from "../redux/slices/pizzaSlice";
+import {
+  setCategoryId,
+  setCurrentPage,
+  setFilters,
+} from "../redux/slices/filterSlice";
+import {
+  fetchPizzas,
+  Pizza,
+  SearchPizzaParams,
+} from "../redux/slices/pizzaSlice";
 import { selectFilters, selectPizza } from "../redux/slices/cartSlice";
+import { useAppDispatch } from "../redux/store";
 
 const Home: React.FC = () => {
   const isSearch = useRef(false);
   const isMounted = useRef(false);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
@@ -23,17 +32,31 @@ const Home: React.FC = () => {
 
   const { items, status } = useSelector(selectPizza);
 
+  const onChangeCategory = React.useCallback((i: number) => {
+    dispatch(setCategoryId(i));
+    dispatch(setCurrentPage(1));
+  }, []);
+
   // если был первый рендер, то проверяем URL-параметры и сохраняем в Redux
   useEffect(() => {
     if (window.location.search) {
-      const params = qs.parse(window.location.search.slice(1));
+      const params = qs.parse(
+        window.location.search.slice(1)
+      ) as unknown as SearchPizzaParams;
 
-      const sort = sortList.find(
-        (obj) => obj.sortProperty === params.sortProperty
-      );
-
-      dispatch(setFilters({ ...params, sort }));
-      isSearch.current = true;
+      const sort = sortList.find((obj) => obj.sortProperty === params.sortBy);
+      if (sort) {
+        params.sortBy = sort.sortProperty;
+        dispatch(
+          setFilters({
+            searchValue: params.search,
+            categoryId: Number(params.category),
+            currentPage: Number(params.currentPage),
+            sort: sort,
+          })
+        );
+        isSearch.current = true;
+      }
     }
   });
 
@@ -50,8 +73,8 @@ const Home: React.FC = () => {
         order,
         category,
         search,
-        currentPage,
-      })
+        currentPage: String(currentPage),
+      } as SearchPizzaParams)
     );
 
     window.scrollTo(0, 0);
@@ -82,18 +105,19 @@ const Home: React.FC = () => {
   const skeletons = [...new Array(6)].map((_, index) => (
     <PizzaBlockSkeleton key={index} />
   ));
-  const pizzas = items.map((item: any) => (
+
+  const pizzas = items.map((item: Pizza) => (
     <Link key={item.id} to={`/pizza/${item.id}`}>
-      {" "}
       <PizzaBlock {...item} />
     </Link>
   ));
+
   return (
     <>
       <div className="container">
         <div className="content__top">
-          <Categories />
-          <Sort />
+          <Categories value={categoryId} onChangeCategory={onChangeCategory} />
+          <Sort value={sort} />
         </div>
         <h2 className="content__title">Все пиццы</h2>
         {status === "error" ? (

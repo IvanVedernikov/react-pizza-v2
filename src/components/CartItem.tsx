@@ -1,7 +1,9 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import clsx from "clsx";
 import {
   addItem,
+  CartItem,
   minusItem,
   refreshTotal,
   remoteItem,
@@ -13,11 +15,11 @@ export type CartItemProps = {
   price: number;
   count: number;
   imageUrl: string;
-  type: number;
+  type: string;
   size: number;
 };
 
-const CartItem: React.FC<CartItemProps> = ({
+const CartItemBlock: React.FC<CartItemProps> = ({
   id,
   title,
   price,
@@ -30,17 +32,17 @@ const CartItem: React.FC<CartItemProps> = ({
 
   const onClickRemove = () => {
     if (window.confirm("Вы действительно хотите удалить товар из корзины?")) {
-      dispatch(remoteItem({ id }));
+      dispatch(remoteItem(id));
       dispatch(refreshTotal());
     }
   };
   const onClickPlus = () => {
-    dispatch(addItem({ id }));
+    dispatch(addItem({ id } as CartItem));
     dispatch(refreshTotal());
   };
 
   const onClickMinus = () => {
-    dispatch(minusItem({ id }));
+    dispatch(minusItem(id));
     dispatch(refreshTotal());
   };
   return (
@@ -56,7 +58,11 @@ const CartItem: React.FC<CartItemProps> = ({
       </div>
       <div className="cart__item-count">
         <button
-          className="button button--outline button--circle cart__item-count-minus"
+          disabled={count === 1}
+          className={clsx(
+            "button button--outline button--circle cart__item-count-minus",
+            { "cart__item-count-minus--disabled": count === 1 }
+          )}
           onClick={onClickMinus}
         >
           <svg
@@ -129,4 +135,4 @@ const CartItem: React.FC<CartItemProps> = ({
   );
 };
 
-export default CartItem;
+export default CartItemBlock;

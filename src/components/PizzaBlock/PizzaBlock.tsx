@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   addItem,
+  CartItem,
   refreshTotal,
   selectCartItemById,
 } from "../../redux/slices/cartSlice";
@@ -47,13 +48,14 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({
     imageUrl: string;
     sizes: number[];
   }) => {
-    const item = {
+    const item: CartItem = {
       id,
       title,
       price,
       imageUrl,
       size: sizes[selectSize],
       type: typeArr[selectType],
+      count: 0,
     };
     dispatch(addItem(item));
     dispatch(refreshTotal());

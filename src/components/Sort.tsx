@@ -1,34 +1,54 @@
+import { useWhyDidYouUpdate } from "ahooks";
 import React, { memo, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { selectSort } from "../redux/slices/cartSlice";
-import { setSort } from "../redux/slices/filterSlice";
+import { useDispatch } from "react-redux";
+import { setSort, SortPropertyEnum } from "../redux/slices/filterSlice";
 
-type SortItem = {
+export type SortItem = {
   name: string;
-  sortProperty: string;
-  order: string;
+  sortProperty: SortPropertyEnum;
+  order: "asc" | "desc";
 };
 
 export const sortList: SortItem[] = [
   {
     name: "популярности (по возрастанию)",
-    sortProperty: "rating",
+    sortProperty: SortPropertyEnum.RATING,
     order: "asc",
   },
   {
     name: "популярности (по убыванию)",
-    sortProperty: "rating",
+    sortProperty: SortPropertyEnum.RATING,
     order: "desc",
   },
-  { name: "цене (по возрастанию)", sortProperty: "price", order: "asc" },
-  { name: "цене (по убыванию)", sortProperty: "price", order: "desc" },
-  { name: "алфавиту (по возрастанию)", sortProperty: "title", order: "asc" },
-  { name: "алфавиту (по убыванию)", sortProperty: "title", order: "desc" },
+  {
+    name: "цене (по возрастанию)",
+    sortProperty: SortPropertyEnum.PRICE,
+    order: "asc",
+  },
+  {
+    name: "цене (по убыванию)",
+    sortProperty: SortPropertyEnum.PRICE,
+    order: "desc",
+  },
+  {
+    name: "алфавиту (по возрастанию)",
+    sortProperty: SortPropertyEnum.TITLE,
+    order: "asc",
+  },
+  {
+    name: "алфавиту (по убыванию)",
+    sortProperty: SortPropertyEnum.TITLE,
+    order: "desc",
+  },
 ];
 
-const Sort = memo(() => {
+interface SortProps {
+  value: SortItem;
+}
+
+const Sort: React.FC<SortProps> = memo(({ value }) => {
+  useWhyDidYouUpdate("Sort", { value });
   const dispatch = useDispatch();
-  const value = useSelector(selectSort);
   const [open, setOpen] = useState(false);
   const sortRef = React.useRef<HTMLDivElement>(null);
   const onClickListItem = (item: SortItem) => {

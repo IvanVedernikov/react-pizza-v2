@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CartEmpty from "../components/CartEmpty";
-import CartItem, { CartItemProps } from "../components/CartItem";
+import CartItemBlock, { CartItemProps } from "../components/CartItem";
 import { clearItems, selectCart } from "../redux/slices/cartSlice";
 const Cart = () => {
   const dispatch = useDispatch();
@@ -96,7 +96,7 @@ const Cart = () => {
             </div>
             <div className="content__items">
               {items.map((item: CartItemProps) => (
-                <CartItem key={item.id} {...item} />
+                <CartItemBlock key={item.id} {...item} />
               ))}
             </div>
             <div className="cart__bottom">

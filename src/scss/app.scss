@@ -115,6 +115,7 @@ body {
 .container {
   width: $container-width;
   margin: 0 auto;
+  padding-bottom: 20px;
 
   &--cart {
     max-width: 820px;
@@ -235,6 +236,23 @@ body {
         svg {
           path:first-of-type {
             display: none;
+          }
+        }
+        &--disabled {
+          opacity: 0.4;
+          border-color: #b6b6b6;
+
+          &:active {
+            transform: none;
+          }
+
+          &:hover {
+            // background-color: transparent;
+            border-color: #b6b6b6;
+          }
+
+          svg path {
+            fill: #787878;
           }
         }
       }
