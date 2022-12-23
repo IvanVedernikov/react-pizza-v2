@@ -1,8 +1,9 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 import { useDispatch, useSelector } from "react-redux";
-import { selectFilters, selectPizza } from "../../redux/slices/cartSlice";
-import { setCurrentPage } from "../../redux/slices/filterSlice";
+import { selectFilters } from "../../redux/filter/selectors";
+import { setCurrentPage } from "../../redux/filter/slice";
+import { selectPizza } from "../../redux/pizza/selectors";
 import styles from "./Pagination.module.scss";
 const Pagination: React.FC = () => {
   const dispatch = useDispatch();

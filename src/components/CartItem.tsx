@@ -3,11 +3,11 @@ import { useDispatch } from "react-redux";
 import clsx from "clsx";
 import {
   addItem,
-  CartItem,
   minusItem,
   refreshTotal,
   remoteItem,
-} from "../redux/slices/cartSlice";
+} from "../redux/cart/slice";
+import { CartItem } from "../redux/cart/types";
 
 export type CartItemProps = {
   id: string;

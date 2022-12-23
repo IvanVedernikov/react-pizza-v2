@@ -1,18 +1,6 @@
-import { SortItem } from "./../../components/Sort";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-export interface FilterState {
-  searchValue: string;
-  categoryId: number;
-  sort: SortItem;
-  currentPage: number;
-}
-
-export enum SortPropertyEnum {
-  RATING = "rating",
-  PRICE = "price",
-  TITLE = "title",
-}
+import { SortItem } from "../../components/Sort";
+import { FilterState, SortPropertyEnum } from "./types";
 
 const initialState: FilterState = {
   searchValue: "",

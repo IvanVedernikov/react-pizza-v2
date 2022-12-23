@@ -11,14 +11,12 @@ import {
   setCategoryId,
   setCurrentPage,
   setFilters,
-} from "../redux/slices/filterSlice";
-import {
-  fetchPizzas,
-  Pizza,
-  SearchPizzaParams,
-} from "../redux/slices/pizzaSlice";
-import { selectFilters, selectPizza } from "../redux/slices/cartSlice";
+} from "../redux/filter/slice";
+import { Pizza, SearchPizzaParams } from "../redux/pizza/types";
+import { selectFilters } from "../redux/filter/selectors";
 import { useAppDispatch } from "../redux/store";
+import { selectPizza } from "../redux/pizza/selectors";
+import { fetchPizzas } from "../redux/pizza/asyncActions";
 
 const Home: React.FC = () => {
   const isSearch = useRef(false);
