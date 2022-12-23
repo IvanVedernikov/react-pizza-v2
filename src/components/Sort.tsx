@@ -36,9 +36,12 @@ const Sort = memo(() => {
     setOpen(false);
   };
 
+  type PopupClick = MouseEvent & { path: Node[] };
+
   useEffect(() => {
-    const handlerClickOutside = (event: any) => {
-      if (!event.path.includes(sortRef.current)) {
+    const handlerClickOutside = (event: MouseEvent) => {
+      const _event = event as PopupClick;
+      if (sortRef.current && !_event.path.includes(sortRef.current)) {
         setOpen(false);
       }
     };

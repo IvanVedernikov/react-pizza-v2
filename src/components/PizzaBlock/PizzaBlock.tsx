@@ -13,7 +13,7 @@ type PizzaBlockProps = {
   title: string;
   price: number;
   imageUrl: string;
-  sizes: number[];
+  sizes: Array<number>;
   types: Array<number>;
 };
 
@@ -70,7 +70,8 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({
               <li
                 key={i}
                 className={selectType === i ? "active" : ""}
-                onClick={() => {
+                onClick={(event) => {
+                  event.preventDefault();
                   setSelectType(i);
                 }}
               >
@@ -83,7 +84,8 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({
               <li
                 key={i}
                 className={selectSize === i ? "active" : ""}
-                onClick={() => {
+                onClick={(event) => {
+                  event.preventDefault();
                   setSelectSize(i);
                 }}
               >
@@ -97,7 +99,7 @@ const PizzaBlock: React.FC<PizzaBlockProps> = ({
           <button
             className="button button--outline button--add"
             onClick={(event) => {
-              event.stopPropagation();
+              event.preventDefault();
               onClickAdd({ id, title, price, imageUrl, sizes });
             }}
           >
