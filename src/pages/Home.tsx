@@ -1,10 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import qs from "qs";
-import Categories from "../components/Categories";
-import Sort, { sortList } from "../components/Sort";
-import PizzaBlock from "../components/PizzaBlock";
-import PizzaBlockSkeleton from "../components/PizzaBlock/PizzaBlockSkeleton";
-import Pagination from "../components/Pagination/Pagination";
+import {
+  Categories,
+  PizzaBlockSkeleton,
+  PizzaBlock,
+  Sort,
+  Pagination,
+} from "../components";
+import { sortList } from "../components/Sort";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -35,6 +38,10 @@ const Home: React.FC = () => {
     dispatch(setCurrentPage(1));
   }, []);
 
+  // import("../utils/math").then((math) => {
+  //   console.log(math.add(16, 26));
+  // });
+
   // если был первый рендер, то проверяем URL-параметры и сохраняем в Redux
   useEffect(() => {
     if (window.location.search) {
@@ -42,7 +49,9 @@ const Home: React.FC = () => {
         window.location.search.slice(1)
       ) as unknown as SearchPizzaParams;
 
-      const sort = sortList.find((obj) => obj.sortProperty === params.sortBy);
+      const sort = sortList.find(
+        (sortitem) => sortitem.sortProperty === params.sortBy
+      );
       if (sort) {
         params.sortBy = sort.sortProperty;
         dispatch(

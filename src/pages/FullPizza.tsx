@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router";
+import { Link } from "react-router-dom";
 
 type PizzaType = {
   imageUrl: string;
@@ -37,6 +38,9 @@ const FullPizza: React.FC = () => {
       <img src={pizza.imageUrl} alt="pizza" />
       <h2>{pizza.title}</h2>
       <h4>от {pizza.price} ₽</h4>
+      <Link to="/" className="button button--outline button--add go-back-btn">
+        <span>Назад</span>
+      </Link>
     </div>
   );
 };
