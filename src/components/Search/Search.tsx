@@ -17,12 +17,12 @@ const Search: React.FC = () => {
     updateSearchValue(event);
     setValue(event.target.value);
   };
-
+  // eslint-disable-next-line
   const updateSearchValue = useCallback(
     debounce((event) => {
       dispatch(setSearchValue(event.target.value));
     }, 500),
-    []
+    [null]
   );
 
   return (

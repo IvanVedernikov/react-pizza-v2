@@ -36,6 +36,7 @@ const Home: React.FC = () => {
   const onChangeCategory = React.useCallback((i: number) => {
     dispatch(setCategoryId(i));
     dispatch(setCurrentPage(1));
+    // eslint-disable-next-line
   }, []);
 
   // import("../utils/math").then((math) => {
@@ -93,7 +94,8 @@ const Home: React.FC = () => {
     }
 
     isSearch.current = false;
-  }, [categoryId, sort, searchValue, currentPage]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryId, sort, currentPage, searchValue]);
 
   // если изменили параметры и был первый рендер, то
   useEffect(() => {
@@ -107,6 +109,7 @@ const Home: React.FC = () => {
       navigate(`?${queryString}`);
     }
     isMounted.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [categoryId, sort.sortProperty, sort.order, currentPage]);
 
   const skeletons = [...new Array(6)].map((_, index) => (
@@ -133,7 +136,7 @@ const Home: React.FC = () => {
               Произошла ошибка <span>😕</span>
             </h2>
             <p>
-              К сожелению, не удалось получить питцы. Попробуйте повторить
+              К сожалению, не удалось получить данные. Попробуйте повторить
               попытку позже.
             </p>
           </div>
